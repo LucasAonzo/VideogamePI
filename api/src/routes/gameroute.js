@@ -24,23 +24,24 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  let { name, description, released, rating, platforms, genres } = req.body;
   try {
-    let game = await createGame(
+    const { name, description, releaseDate, rating, genres, platforms, img } =
+      req.body;
+    const newGame = await createGame(
       name,
       description,
-      released,
+      releaseDate,
       rating,
       platforms,
-      genres
+      img
     );
     let genresdb = await Genre.findAll({
       where: {
         name: genres,
       },
     });
-    game.addGenres(genresdb);
-    res.status(200).json(game);
+    newGame.addGenre(genresdb);
+    res.status(200).json(newGame);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

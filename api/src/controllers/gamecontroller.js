@@ -1,5 +1,6 @@
 const { Videogame, Genre } = require("../db.js");
 const { Op } = require("sequelize");
+
 const axios = require("axios");
 const { API_KEY } = process.env;
 
@@ -53,7 +54,7 @@ const getGames = async (page = 1, pageSize = 15) => {
     const paginatedGames = allGames.slice(start, end);
 
     return {
-      total: Math.min(allGames.length, 100), // Actualizar el total a la cantidad real de juegos o máximo 100
+      total: Math.min(allGames.length, 100), // máximo 100
       page,
       pageSize,
       games: paginatedGames,

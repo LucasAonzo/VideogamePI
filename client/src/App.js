@@ -1,9 +1,16 @@
-import './App.css';
+import Landing from "./components/Landing/Landing.jsx";
+import Navbar from "./components/Navbar/Navbar.jsx";
+import Card from "./components/Card/Card.jsx";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <h1>Henry Videogames</h1>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/videogames" element={<Card />} />
+      </Routes>
     </div>
   );
 }

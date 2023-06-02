@@ -5,7 +5,7 @@ const { Router } = require("express");
 const videogamesrouter = require("./gameroute.js");
 const videogamesrouterid = require("./gamerouteid.js");
 const genresrouter = require("./genreroute.js");
-const plataformsrouter = require("./plataformroute.js");
+const videogamesname = require("./gameroutename.js");
 
 const router = Router();
 
@@ -13,8 +13,8 @@ const router = Router();
 // Ejemplo: router.use('/auth', authRouter);
 
 router.use("/videogames", videogamesrouter);
-router.use("/videogame", videogamesrouterid);
+router.use("/videogames", videogamesrouterid);
 router.use("/genres", genresrouter);
-router.use("/plataforms", plataformsrouter);
+router.use("/name", videogamesname);
 
 module.exports = router;
