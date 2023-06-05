@@ -75,7 +75,7 @@ export default function Detail() {
           </div>
           <div className={style.platformGrid}>
             <h2 className={style.platformTitle}>Platforms:</h2>
-            {renderPlatforms()}
+            {renderPlatforms(gameDetail.platforms)}
           </div>
           <div className={style.description}>
             <h2 className={style.descriptionTitle}>Description:</h2>
