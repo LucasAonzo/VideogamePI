@@ -3,6 +3,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background: rgb(229, 142, 39);
+  background: radial-gradient(
+    circle,
+    rgba(229, 142, 39, 0.3926164215686274) 0%,
+    rgba(0, 0, 0, 0.7343531162464986) 49%,
+    rgba(22, 26, 30, 1) 100%
+  );
 }
 
 .buttonContainer {
@@ -43,10 +50,12 @@
   margin: 0px;
   font-weight: 800;
   text-transform: uppercase;
-  margin-bottom: 1rem;
-  font-size: 100px;
+  margin-bottom: 1.5rem;
+  font-size: 50px;
   grid-column-start: 1;
   grid-column-end: 4;
+  color: #fbfbfb;
+  background-color: rgba(154, 154, 154, 0.5);
 }
 
 .imageContainer {
@@ -71,7 +80,7 @@
   font-family: sans-serif;
   font-weight: 800;
   text-transform: uppercase;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   font-size: 1.5rem;
   margin-top: 0px;
   border-top: 1px solid rgba(0, 0, 0, 0.2);
@@ -85,7 +94,7 @@
   font-family: sans-serif;
   font-weight: 800;
   text-transform: uppercase;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   font-size: 3rem;
   margin-top: 0px;
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -109,7 +118,7 @@
   font-weight: 800;
   text-transform: uppercase;
   font-size: 1.5rem;
-  margin-top: 5px;
+  margin-top: 10px;
   grid-column-start: 1;
   grid-column-end: 4;
   margin-bottom: 0px;
@@ -123,7 +132,7 @@
 
 .genreList li {
   font-size: 16px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 .dupliGenre {
@@ -168,7 +177,7 @@
   font-weight: 800;
   text-transform: uppercase;
   font-size: 2rem;
-  margin-top: 5px;
+  margin-top: 10px;
   grid-column-start: 1;
   grid-column-end: 4;
   margin-bottom: 0px;
@@ -184,7 +193,7 @@
 
 .platformList li {
   font-size: 16px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 .dupliPlatform {
@@ -217,7 +226,7 @@
   font-weight: 800;
   text-transform: uppercase;
   font-size: 2rem;
-  margin-top: 5px;
+  margin-top: 10px;
   grid-column-start: 1;
   grid-column-end: 4;
   margin-bottom: 0px;
@@ -243,7 +252,7 @@
 
 .descriptionText ul li {
   font-size: 16px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 /* Estilos generales para los bordes y sombreado */

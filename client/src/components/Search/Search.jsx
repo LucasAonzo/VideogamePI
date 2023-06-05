@@ -12,11 +12,7 @@ export default function SearchBar() {
   };
 
   useEffect(() => {
-    const delayTimer = setTimeout(() => {
-      dispatch(getGameByName(game));
-    }, 500);
-
-    return () => clearTimeout(delayTimer);
+    dispatch(getGameByName(game));
   }, [game, dispatch]);
 
   const searchGame = () => {

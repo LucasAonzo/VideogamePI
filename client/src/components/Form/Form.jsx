@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { postGame, getAllGames, getGenres } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
+import style from "./Form.module.css";
 
 const CreateGame = () => {
   const dispatch = useDispatch();
@@ -156,51 +157,59 @@ const CreateGame = () => {
   };
 
   return (
-    <div>
+    <div className={style.container}>
       <form onSubmit={handleFormSubmit}>
         <div>
-          <label>Name: </label>
+          <label className={style.label}>Name: </label>
           <input
             type="text"
             name="name"
             value={input.name}
             onChange={handleInputChange}
+            className={style.input}
           />
-          {errorIn.name && <p>{errorIn.name}</p>}
+          {errorIn.name && <p className={style.error}>{errorIn.name}</p>}
         </div>
         <div>
-          <label>Description: </label>
+          <label className={style.label}>Description: </label>
           <input
             type="text"
             name="description"
             value={input.description}
             onChange={handleInputChange}
+            className={style.input}
           />
-          {errorIn.description && <p>{errorIn.description}</p>}
+          {errorIn.description && (
+            <p className={style.error}>{errorIn.description}</p>
+          )}
         </div>
         <div>
-          <label>Released: </label>
+          <label className={style.label}>Released: </label>
           <input
             type="date"
             name="released"
             value={input.released}
             onChange={handleInputChange}
+            className={style.input}
           />
-          {errorIn.released && <p>{errorIn.released}</p>}
+          {errorIn.released && (
+            <p className={style.error}>{errorIn.released}</p>
+          )}
         </div>
         <div>
-          <label>Rating: </label>
+          <label className={style.label}>Rating: </label>
           <input
             type="number"
             name="rating"
             value={input.rating}
             onChange={handleInputChange}
+            className={style.input}
           />
-          {errorIn.rating && <p>{errorIn.rating}</p>}
+          {errorIn.rating && <p className={style.error}>{errorIn.rating}</p>}
         </div>
         <div>
-          <label>Genres: </label>
-          <select onChange={handleSelectGenres}>
+          <label className={style.label}>Genres: </label>
+          <select onChange={handleSelectGenres} className={style.select}>
             <option value="">Select genre</option>
             {genres.map((genre) => (
               <option key={genre.id} value={genre.name}>
@@ -216,17 +225,18 @@ const CreateGame = () => {
                   type="button"
                   value={genre}
                   onClick={handleSelectGenresDelete}
+                  className={style.button}
                 >
                   X
                 </button>
               </div>
             ))}
           </div>
-          {errorIn.genres && <p>{errorIn.genres}</p>}
+          {errorIn.genres && <p className={style.error}>{errorIn.genres}</p>}
         </div>
         <div>
-          <label>Platforms: </label>
-          <select onChange={handleSelectPlatforms}>
+          <label className={style.label}>Platforms: </label>
+          <select onChange={handleSelectPlatforms} className={style.select}>
             <option value="">Select platform</option>
             {newSet.length > 0 ? (
               newSet.map((platform) => (
@@ -246,26 +256,34 @@ const CreateGame = () => {
                   type="button"
                   value={platform}
                   onClick={handleSelectPlatformsDelete}
+                  className={style.button}
                 >
                   X
                 </button>
               </div>
             ))}
           </div>
-          {errorIn.platforms && <p>{errorIn.platforms}</p>}
+          {errorIn.platforms && (
+            <p className={style.error}>{errorIn.platforms}</p>
+          )}
         </div>
         <div>
-          <label>Background_image: </label>
+          <label className={style.label}>Background_image: </label>
           <input
             type="text"
             name="background_image"
             value={input.background_image}
             onChange={handleInputChange}
+            className={style.input}
           />
-          {errorIn.background_image && <p>{errorIn.background_image}</p>}
+          {errorIn.background_image && (
+            <p className={style.error}>{errorIn.background_image}</p>
+          )}
         </div>
 
-        <button type="submit">Create Game</button>
+        <button type="submit" className={style.button}>
+          Create Game
+        </button>
       </form>
     </div>
   );

@@ -66,14 +66,7 @@ const FilterButtons = () => {
           <option value="DB">Created by user</option>
         </select>
       </div>
-      <div>
-        <button
-          className={style.selects}
-          onClick={() => dispatch(getAllGames())}
-        >
-          Restart
-        </button>
-      </div>
+
       <div>
         <select
           className={style.selects}
@@ -99,6 +92,14 @@ const FilterButtons = () => {
           <option value="Ascendente">Ascendant</option>
           <option value="Descendente">Descendant</option>
         </select>
+      </div>
+      <div>
+        <button
+          className={style.selects}
+          onClick={() => dispatch(getAllGames())}
+        >
+          Restart
+        </button>
       </div>
     </div>
   );

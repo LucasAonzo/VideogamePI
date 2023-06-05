@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.containerButtons {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttons {
+  display: inline-block;
+  padding: 10px;
+  margin: 5px;
+  background-color: #eaeaea;
+  color: #333;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.buttons:hover {
+  background-color: #ccc;
+}
+
+.current {
+  display: inline-block;
+  padding: 10px;
+  margin: 5px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

@@ -1,258 +1,89 @@
-label {
-  color: rgb(7, 7, 7);
-  font-family: "MetalSlug";
-  font-size: 20px;
-  text-shadow: 2px 2px 2px black;
-}
-
-input[type="range"] {
-  -webkit-appearance: none;
-  width: 95%;
-  height: 10px;
-  border-radius: 5px;
-}
-
-input[type="range"]::-webkit-slider-runnable-track {
-  width: 95%;
-  height: 10px;
-  cursor: pointer;
-  border: 1px solid rgb(255, 255, 255);
-  background-color: rgb(95, 94, 94);
-  border-radius: 5px;
-}
-
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
-  background-color: #fff;
-  cursor: pointer;
-  margin-top: -6px;
-}
-
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  max-width: 600px; /* Aumentamos el ancho máximo del contenedor */
+  margin: auto; /* Centramos el contenedor horizontalmente */
+  padding: 40px; /* Aumentamos el espacio interno del contenedor */
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 50px;
 }
 
-.containerForm {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 30%;
+.form-group {
   margin-bottom: 20px;
 }
 
-.form {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  gap: 20px;
-  padding: 15px;
-  padding-top: 0;
-}
-
-.inputs {
-  background: none;
-  backdrop-filter: blur(7px);
-  width: 95%;
-  height: 26px;
-  font-size: 15px;
-  border: 2px solid rgb(255, 255, 255);
-  font-family: "MetalSlug";
-  color: rgb(14, 13, 13);
-  letter-spacing: 2px;
-}
-
-.divs {
-  display: flex;
-  justify-content: left;
-  text-align: left;
-  flex-direction: column-reverse;
-
-  gap: 20px;
-}
-
-.released {
-  background: none;
-  backdrop-filter: blur(7px);
-  width: 95%;
-  height: 26px;
-  font-size: 15px;
-  border: 2px solid rgb(255, 255, 255);
-  font-family: "MetalSlug";
-  color: rgb(10, 10, 10);
-  letter-spacing: 2px;
-}
-
-input[type="date"]::-webkit-calendar-picker-indicator {
-  background-size: 20px 20px;
-  background-position: center;
-  padding-right: 5px;
-  filter: invert(1) saturate(10000%) hue-rotate(160deg);
-}
-
-.divRating {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-}
-
-.rating {
-  color: rgb(10, 10, 10);
-  font-family: "MetalSlug";
-  text-align: center;
-  margin: 0;
-}
-
-.description {
-  background: none;
-  backdrop-filter: blur(7px);
-  font-size: 15px;
-  border: 2px solid rgb(255, 255, 255);
-  font-family: "MetalSlug";
-  color: rgb(8, 7, 7);
-  letter-spacing: 2px;
-  width: 95%;
-  height: 100px;
-}
-
-.selects {
-  background: none;
-  backdrop-filter: blur(7px);
-  text-align: center;
-  letter-spacing: 3px;
-  width: 95%;
-  height: 30px;
-  font-size: 15px;
-  font-family: "MetalSlug";
-  border: 2px solid rgb(255, 255, 255);
-  background: none;
-  color: rgb(5, 5, 5);
-  text-shadow: 1px 1px 1px rgb(255, 255, 255);
-}
-
-.selects:focus,
-.selects:hover {
-  border: 2px solid rgb(0, 0, 0);
-  color: rgb(0, 0, 0);
-  background-color: #ffffff;
-  cursor: pointer;
-  transition: 0.2s ease-in;
-}
-
-.create {
-  margin-top: 13px;
-  margin-right: 9px;
-  letter-spacing: 3px;
-  width: 140px;
-  height: 36px;
-  font-size: 30px;
-  font-family: "MetalSlug";
-  border: 2px solid rgb(255, 255, 255);
-  background: none;
-  color: rgb(5, 5, 5);
-  text-shadow: 0 0 3px #fff, 0 0 1px #fff, 0 0 7px #fff, 0 0 20px #000000,
-    0 0 20px #000000, 0 0 30px #000000, 0 0 10px #000000, 0 0 40px #000000;
-}
-
-.create:hover {
-  cursor: pointer;
-  border: 2px solid rgb(0, 0, 0);
-  color: rgb(0, 0, 0);
-  background-color: #ffffff;
-  text-shadow: 0 0 3px #000000, 0 0 1px #000000, 0 0 7px #000000,
-    0 0 20px #ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff, 0 0 10px #ffffff,
-    0 0 40px #ffffff;
-  transition: 0.2s ease-in;
-}
-
-.errores {
-  padding-top: 5px;
-  font-weight: 500;
-  color: red;
-  font-family: "MetalSlug";
-  text-decoration-line: underline;
-  margin: 0;
-  text-shadow: 1px 1px 1px black;
-  animation: salto 1s steps(2) infinite;
-}
-
-@keyframes salto {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateX(5px);
-  }
-}
-
-.contPlataformas {
-  display: flex;
-  justify-content: center;
-  width: 95%;
-  padding-top: 5px;
-  gap: 2px;
-}
-
-.plataformas {
-  color: rgb(0, 0, 0);
-  background-color: rgb(105, 97, 78);
-  font-family: "MetalSlug";
-  font-size: 15px;
-  height: 30px;
-  margin-right: 4px;
-  text-shadow: 1px 1px 1px black;
-}
-
-.plataformas:hover {
-  background-color: rgb(194, 102, 102);
-  color: red;
-  text-shadow: 1px 1px 1px black;
-  cursor: pointer;
-}
-
-.errorsBack {
-  font-family: "MetalSlug";
-  font-size: 30px;
-  color: red;
-  text-shadow: 2px 2px 1px black;
-  animation: errorbackend 1s steps(2) infinite;
-  letter-spacing: 2px;
-  margin-left: 6px;
-}
-
-@keyframes errorbackend {
-  from {
-    text-decoration: none;
-  }
-  to {
-    text-decoration: underline;
-  }
-}
-
-.indicador {
-  color: red;
-  font-size: 40px;
+.label {
+  display: block;
+  margin-bottom: 5px;
   font-weight: bold;
-  animation: saltoError 1s steps(2) infinite;
-  text-shadow: 1px 1px 3px rgb(255, 255, 255);
 }
 
-@keyframes saltoError {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(5px);
-  }
+.input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px; /* Agregamos espaciado entre inputs */
 }
 
-.divSubmit {
+.input[type="text"],
+.input[type="date"],
+.input[type="number"] {
+  width: 100%;
+  max-width: 300px;
+}
+
+.select-container {
+  width: 100%;
+}
+
+.select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px; /* Agregamos espaciado entre selects */
+}
+
+.genres-list,
+.platforms-list {
   display: flex;
-  justify-content: center;
-  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.genres-item,
+.platforms-item {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  background-color: #e4e4e4;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.genres-item p,
+.platforms-item p {
+  margin-right: 5px;
+}
+
+.genres-item button,
+.platforms-item button {
+  border: none;
+  background-color: transparent;
+  color: red;
+  cursor: pointer;
+}
+
+.error {
+  color: red;
+  margin-top: 5px;
+}
+
+.button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
