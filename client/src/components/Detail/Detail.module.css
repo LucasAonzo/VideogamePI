@@ -1,0 +1,255 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.homeButton {
+  background-color: #f44336;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding-bottom: 1%;
+  background: var(--color-bg);
+  width: 80%;
+  border: 1px solid var(--color-page-bg);
+  border-radius: 2%;
+  margin: 20px;
+  padding: 10px;
+}
+
+.name {
+  color: rgba(0, 0, 0, 0.534);
+  text-shadow: 1px 1px rgba(255, 255, 255, 0.15);
+  font-family: sans-serif;
+  margin: 0px;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  font-size: 100px;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+
+.imageContainer {
+  display: flex;
+  justify-content: center;
+  object-fit: cover;
+  border-radius: 3%;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 5;
+}
+
+.image {
+  width: 95%;
+  border-radius: 2%;
+}
+
+.title {
+  color: rgba(0, 0, 0, 0.534);
+  text-shadow: 1px 1px rgba(255, 255, 255, 0.15);
+  font-family: sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  margin-top: 0px;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 10px 0;
+}
+
+.rating {
+  color: rgba(114, 99, 12, 0.61);
+  text-shadow: 1px 1px rgba(255, 255, 255, 0.15);
+  font-family: sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  font-size: 3rem;
+  margin-top: 0px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.genreGrid {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 10px;
+  margin: 10px;
+}
+
+.genreTitle {
+  color: rgba(0, 0, 0, 0.534);
+  text-shadow: 1px 1px rgba(255, 255, 255, 0.15);
+  font-family: sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  margin-top: 5px;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  margin-bottom: 0px;
+}
+
+.genreList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.genreList li {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.dupliGenre {
+  color: blue;
+}
+
+.uniqueGenre {
+  color: green;
+}
+
+.release {
+  grid-column-start: 3;
+  grid-column-end: 4;
+}
+
+.released {
+  color: rgba(0, 0, 0, 0.534);
+  text-shadow: 1px 1px rgba(255, 255, 255, 0.15);
+  font-family: sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.platformGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 10px;
+  margin: 10px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+
+.platformTitle {
+  color: rgba(0, 0, 0, 0.534);
+  text-shadow: 1px 1px rgba(255, 255, 255, 0.15);
+  font-family: sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 2rem;
+  margin-top: 5px;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  margin-bottom: 0px;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+
+.platformList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.platformList li {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.dupliPlatform {
+  color: blue;
+}
+
+.uniquePlatform {
+  color: green;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-items: center;
+  justify-content: center;
+  margin: 10px;
+  padding: 10px;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 10px 0;
+}
+
+.descriptionTitle {
+  color: rgba(0, 0, 0, 0.534);
+  text-shadow: 1px 1px rgba(255, 255, 255, 0.15);
+  font-family: sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 2rem;
+  margin-top: 5px;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  margin-bottom: 0px;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+
+.descriptionText {
+  color: rgba(0, 0, 0, 0.363);
+  text-shadow: 1px 1px rgba(255, 255, 255, 0.15);
+  font-family: sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 1rem;
+  margin: 10px;
+}
+
+.descriptionText ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.descriptionText ul li {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+/* Estilos generales para los bordes y sombreado */
+.gridContainer > * {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  padding: 10px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}

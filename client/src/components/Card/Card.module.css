@@ -1,42 +1,76 @@
 .container {
+  width: 100%;
+  max-width: 1200px;
+  border-radius: 8px;
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
 }
 
 .card {
-  width: calc(20% - 20px);
-  margin-bottom: 20px;
-  padding: 10px;
-  background-color: #f5f5f5;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease-in-out;
-  cursor: pointer;
-  margin: 10px;
+  display: grid;
+  width: 430px;
+  height: 420px;
+  border-radius: 15px;
+  box-shadow: 0 2px 2px rgba(43, 42, 42, 0);
+  overflow: hidden;
+  margin: 20px;
+  background: var(--color-bg);
+  text-align: center;
+  transition: all 0.25s;
+  gap: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
+
 .card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-}
-
-.card__title {
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.card__released,
-.card__rating,
-.card__genres,
-.card__platforms {
-  font-size: 14px;
-  margin-bottom: 5px;
+  transform: translateY(-15px);
+  box-shadow: 0 12px 16px rgba(0, 0, 0, 0.25);
 }
 
 .card__image {
-  width: 100%;
-  height: 250px;
-  border-radius: 5px;
-  margin-top: 10px;
+  width: 430px;
+  height: 220px;
+  margin: 0px;
+}
+
+.card__title {
+  margin: 5px;
+  height: fit-content;
+  color: rgba(0, 0, 0, 0.39);
+  text-shadow: 1px 1px rgba(255, 255, 255, 0.15);
+  font-family: sans-serif;
+  font-weight: 800;
+  text-decoration: none; /* Remove underline */
+}
+
+.card__rating {
+  margin: 0px;
+  font-size: 25px;
+  color: rgba(216, 209, 76, 0.534);
+  font-family: sans-serif;
+  font-weight: 800;
+}
+
+.card__genrebox {
+  margin: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.card__genre {
+  display: inline-block;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  padding: 5px 10px;
+  background-color: var(--color-bg-light);
+  color: rgba(0, 0, 0, 0.308);
+  text-shadow: 1px 1px rgba(255, 255, 255, 0.15);
+  font-family: sans-serif;
+  font-weight: 800;
+  white-space: nowrap; /* Prevent genre text from wrapping */
 }
