@@ -35,8 +35,12 @@ const FilterButtons = () => {
   return (
     <div className={style.container}>
       <div>
-        <select className={style.selects} onChange={filterByGenre}>
-          <option select disabled selected={true}>
+        <select
+          className={style.selects}
+          defaultValue=""
+          onChange={filterByGenre}
+        >
+          <option disabled value="">
             Genres
           </option>
           {genres.map((genre) => {
@@ -49,8 +53,12 @@ const FilterButtons = () => {
         </select>
       </div>
       <div>
-        <select className={style.selects} onChange={filterByOrigin}>
-          <option select disabled selected={true}>
+        <select
+          className={style.selects}
+          defaultValue=""
+          onChange={filterByOrigin}
+        >
+          <option disabled value="">
             Origin
           </option>
           <option value="ALL">All games</option>
@@ -67,8 +75,12 @@ const FilterButtons = () => {
         </button>
       </div>
       <div>
-        <select className={style.selects} onChange={gameOrderRating}>
-          <option select disabled selected={true}>
+        <select
+          className={style.selects}
+          defaultValue=""
+          onChange={gameOrderRating}
+        >
+          <option disabled value="">
             Rating
           </option>
           <option value="Ascendente">Ascendant</option>
@@ -76,8 +88,12 @@ const FilterButtons = () => {
         </select>
       </div>
       <div>
-        <select className={style.selects} onChange={gamesOrderAlphabetic}>
-          <option select disabled selected={true}>
+        <select
+          className={style.selects}
+          defaultValue=""
+          onChange={gamesOrderAlphabetic}
+        >
+          <option disabled value="">
             A/Z
           </option>
           <option value="Ascendente">Ascendant</option>

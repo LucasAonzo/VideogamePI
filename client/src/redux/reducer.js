@@ -7,8 +7,6 @@ import {
   GET_GENRES,
   GET_GENRES_FILTERED,
   GET_GAMES_FROM_API_OR_DB,
-  GET_PLATFORMS,
-  FETCHED_ERRORS,
   GAME_POST,
 } from "./actions";
 
@@ -17,8 +15,6 @@ const initialState = {
   allGamesToFilter: [],
   gameDetail: [],
   genres: [],
-  platforms: [],
-  errors: "",
   ApiOrDb: "",
 };
 
@@ -136,26 +132,6 @@ const reducer = (state = initialState, action) => {
       }
 
     // Llenar el estado global de plataformas
-    case GET_PLATFORMS:
-      let platforms = [];
-      state.allGamesToFilter.forEach((game) => {
-        game.platform.forEach((platform) => {
-          if (!platforms.includes(platform)) {
-            platforms.push(platform);
-          }
-        });
-      });
-      return {
-        ...state,
-        platforms: platforms,
-      };
-
-    case FETCHED_ERRORS:
-      return {
-        ...state,
-        allGames: [],
-        errors: action.payload,
-      };
 
     default:
       return { ...state };

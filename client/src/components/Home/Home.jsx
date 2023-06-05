@@ -4,7 +4,6 @@ import { getAllGames, getGenres } from "../../redux/actions";
 import Card from "../Card/Card";
 import SearchBar from "../Search/Search";
 import Pagination from "../Pagination/Pagination";
-import Navbar from "../Navbar/Navbar";
 import Filter from "../Filter/Filter";
 import style from "./Home.module.css";
 
@@ -31,7 +30,7 @@ const Home = (props) => {
   useEffect(() => {
     dispatch(getAllGames());
     dispatch(getGenres());
-  }, []);
+  }, [dispatch]);
 
   console.log(allGames.genres);
 

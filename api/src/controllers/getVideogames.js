@@ -8,15 +8,15 @@ const getGames = async () => {
     let response = await axios.get(
       `https://api.rawg.io/api/games?key=${API_KEY}&page=${i}`
     );
-    response.data.results.forEach((v) => {
+    response.data.results.forEach((game) => {
       apiGames.push({
-        id: v.id,
-        name: v.name,
-        released: v.released,
-        background_image: v.background_image,
-        rating: v.rating,
-        platforms: v.platforms.map((p) => p.platform.name),
-        genres: v.genres.map((g) => g.name),
+        id: game.id,
+        name: game.name,
+        released: game.released,
+        background_image: game.background_image,
+        rating: game.rating,
+        platforms: game.platforms.map((platform) => platform.platform.name),
+        genres: game.genres.map((genre) => genre.name),
         createdInDb: false,
       });
     });
@@ -32,21 +32,21 @@ const getGames = async () => {
     },
   });
 
-  const totalGames = apiGames.concat(dbGames);
+  const allGames = apiGames.concat(dbGames);
 
-  const listGames = totalGames.map((vg) => {
+  const gameList = allGames.map((game) => {
     return {
-      name: vg.name,
-      id: vg.id,
-      released: vg.released,
-      image: vg.background_image,
-      platforms: vg.platforms,
-      genres: vg.genres,
-      rating: vg.rating,
-      createdInDb: vg.createdInDb,
+      name: game.name,
+      id: game.id,
+      released: game.released,
+      image: game.background_image,
+      platforms: game.platforms,
+      genres: game.genres,
+      rating: game.rating,
+      createdInDb: game.createdInDb,
     };
   });
-  return listGames;
+  return gameList;
 };
 
 const gameDetail = async (id) => {
@@ -63,7 +63,9 @@ const gameDetail = async (id) => {
       description: detail.description.replace(/<[^>]*>?/g, ""),
       released: detail.released,
       rating: detail.rating,
-      platforms: detail.platforms.map((p) => p.platform.name).toString(),
+      platforms: detail.platforms
+        .map((platform) => platform.platform.name)
+        .toString(),
     };
 
     return gameApiDetail;
@@ -109,7 +111,7 @@ const createGame = async (
   platforms
 ) => {
   if (!name || !description || !platforms || !background_image) {
-    throw "missing data for create a videogame";
+    throw "missing data to create a videogame";
   } else {
     const newGame = await Videogame.create({
       name,

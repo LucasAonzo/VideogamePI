@@ -7,7 +7,6 @@ const CreateGame = () => {
 
   const genres = useSelector((state) => state.genres);
   const allGames = useSelector((state) => state.allGames);
-  const [range, setRange] = useState(5);
 
   const [input, setInput] = useState({
     name: "",
