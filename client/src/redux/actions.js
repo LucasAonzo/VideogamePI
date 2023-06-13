@@ -2,6 +2,7 @@ import axios from "axios";
 export const GET_ALL_GAMES = "GET_ALL_GAMES";
 export const GET_GAME_BY_NAME = "GET_GAME_BY_NAME";
 export const GET_GAME_BY_ID = "GET_GAME_BY_ID";
+export const CLEAR_GAME_BY_ID = "CLEAR_GAME_BY_ID";
 export const GET_GENRES = "GET_GENRES";
 export const GET_GENRES_FILTERED = "GET_GENRES_FILTERED";
 export const GET_GAMES_ORDER_RATING = "GET_GAMES_ORDER_RATING";
@@ -45,6 +46,10 @@ export const getGameById = (idVideogame) => {
       console.log(error);
     }
   };
+};
+
+export const clearGameById = () => {
+  return { type: CLEAR_GAME_BY_ID };
 };
 
 export const getGenres = () => {

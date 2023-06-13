@@ -3,6 +3,7 @@ import {
   GET_GAMES_ORDER_ALPHABETIC,
   GET_GAMES_ORDER_RATING,
   GET_GAME_BY_ID,
+  CLEAR_GAME_BY_ID,
   GET_GAME_BY_NAME,
   GET_GENRES,
   GET_GENRES_FILTERED,
@@ -40,12 +41,19 @@ const reducer = (state = initialState, action) => {
         ...state,
         gameDetail: action.payload,
       };
+    //Limpiar el estado del juego especifico
+    case CLEAR_GAME_BY_ID:
+      return {
+        ...state,
+        gameDetail: [],
+      };
     // Traer todos los generos
     case GET_GENRES:
       return {
         ...state,
         genres: action.payload,
       };
+
     // Filtrar segun el genero
     case GET_GENRES_FILTERED:
       const selectedGenreId = action.payload;

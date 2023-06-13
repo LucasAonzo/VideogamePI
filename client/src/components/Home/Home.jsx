@@ -5,6 +5,7 @@ import Card from "../Card/Card";
 import SearchBar from "../Search/Search";
 import Pagination from "../Pagination/Pagination";
 import Filter from "../Filter/Filter";
+import Loading from "../Loading/Loading";
 import style from "./Home.module.css";
 
 const Home = (props) => {
@@ -13,6 +14,7 @@ const Home = (props) => {
   console.log(allGames);
 
   const [currentPage, setCurrentPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
   const gamesPerPage = 15;
 
   // Calcular los índices del primer y último juego en la página actual
@@ -30,7 +32,12 @@ const Home = (props) => {
   useEffect(() => {
     dispatch(getAllGames());
     dispatch(getGenres());
+    setIsLoading(false);
   }, [dispatch]);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   console.log(allGames.genres);
 

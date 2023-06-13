@@ -56,9 +56,9 @@ function About() {
       </p>
       <div className={style.cardContainer}>
         <Link
-          to={{ pathname: "https://github.com/LucasAonzo" }}
+          className={style.card}
+          to="https://github.com/LucasAonzo"
           target="_blank"
-          rel="noopener noreferrer"
         >
           <img className={style.profileImage} src={img} alt="Foto de perfil" />
           <h1 className={style.name}>Lucas Aonzo</h1>

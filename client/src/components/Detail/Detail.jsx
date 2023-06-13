@@ -1,16 +1,30 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import style from "./Detail.module.css";
-import { getGameById } from "../../redux/actions";
+import { getGameById, clearGameById } from "../../redux/actions";
+import Loading from "../Loading/Loading";
 
 export default function Detail() {
   const { idVideogame } = useParams();
   const dispatch = useDispatch();
   const gameDetail = useSelector((state) => state.gameDetail);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(getGameById(idVideogame));
+    setIsLoading(true);
+    dispatch(getGameById(idVideogame))
+      .then(() => {
+        setIsLoading(false); // Establece isLoading en false cuando la carga ha finalizado
+      })
+      .catch((error) => {
+        console.log("Error al cargar el juego:", error);
+        setIsLoading(false); // En caso de error, también establece isLoading en false
+      });
+
+    return () => {
+      dispatch(clearGameById());
+    };
   }, [dispatch, idVideogame]);
 
   const renderGenres = () => {
@@ -51,7 +65,9 @@ export default function Detail() {
           <button className={style.homeButton}>Return to Video Games</button>
         </Link>
       </div>
-      {gameDetail ? (
+      {isLoading ? (
+        <Loading /> // Muestra el componente de carga mientras isLoading es true
+      ) : gameDetail ? (
         <div className={style.gridContainer}>
           <h2 className={style.name}>{gameDetail.name}</h2>
           <div className={style.imageContainer}>
@@ -86,7 +102,7 @@ export default function Detail() {
           </div>
         </div>
       ) : (
-        <h1>Loading...</h1>
+        <h1>Error al cargar el juego.</h1>
       )}
     </div>
   );

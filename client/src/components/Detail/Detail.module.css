@@ -3,13 +3,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: rgb(229, 142, 39);
-  background: radial-gradient(
-    circle,
-    rgba(229, 142, 39, 0.3926164215686274) 0%,
-    rgba(0, 0, 0, 0.7343531162464986) 49%,
-    rgba(22, 26, 30, 1) 100%
-  );
 }
 
 .buttonContainer {

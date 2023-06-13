@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 50px 0px;
+  align-items: center;
+}
+.titulo {
+  color: #fbfbfb;
+  background-color: rgba(154, 154, 154, 0.5);
+  font-size: 50px;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  margin: 50px;
+  font-family: sans-serif;
+  text-shadow: 1px 1px rgba(255, 255, 255, 0.15);
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  margin: 0px;
+  padding: 0px;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}

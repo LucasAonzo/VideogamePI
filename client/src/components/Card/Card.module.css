@@ -10,29 +10,42 @@
   background-color: #f5f5f5;
   width: 280px; /* Ajusta el ancho de la card */
   height: 380px; /* Ajusta el alto de la card */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .card__image {
+  flex-grow: 1;
   width: 100%;
-  height: 200px; /* Ajusta el alto de la imagen */
+  height: 100%;
   object-fit: cover; /* Ajusta el ajuste de la imagen */
   border-radius: 4px;
+}
+
+.card__content {
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.7); /* Cambia el fondo a un color oscuro */
+  color: #fff; /* Cambia el color del texto a blanco */
 }
 
 .card__title {
   margin: 10px 0;
   font-size: 18px;
   font-weight: bold;
+  text-decoration: none; /* Elimina el subrayado del título */
 }
 
 .card__rating {
   display: inline-block;
   font-size: 14px;
   margin-right: 5px;
+  text-decoration: none; /* Elimina el subrayado del rating */
 }
 
 .card__genrebox {
   margin-top: 10px;
   font-size: 14px;
   color: #666;
+  text-decoration: none; /* Elimina el subrayado del género */
 }

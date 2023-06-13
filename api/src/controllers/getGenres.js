@@ -1,5 +1,5 @@
 const axios = require("axios");
-const { Videogame, Genre } = require("../db");
+const { Genre } = require("../db");
 const API_KEY = process.env.API_KEY;
 
 const getGenres = async () => {
@@ -7,12 +7,11 @@ const getGenres = async () => {
     `https://api.rawg.io/api/genres?key=${API_KEY}`
   );
   const dataGenres = apiGenres.data;
-  const genres = dataGenres.results.map((g) => g.name);
-
-  genres.map((g) =>
+  const genres = dataGenres.results.map((gen) => gen.name);
+  genres.map((gen) =>
     Genre.findOrCreate({
       where: {
-        name: g,
+        name: gen,
       },
     })
   );

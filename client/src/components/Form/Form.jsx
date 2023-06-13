@@ -21,20 +21,39 @@ const CreateGame = () => {
 
   const validateInputs = (input) => {
     let errors = {};
+    const alphanumericRegex = /^[a-zA-Z0-9]+$/;
+    const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
     if (!input.name) {
       errors.name = "Name is required";
-    } else if (!input.description) {
-      errors.description = "Description is required";
+    } else if (!alphanumericRegex.test(input.name)) {
+      errors.name = "Name should only contain letters and numbers";
+      if (!input.description) {
+        errors.description = "Description is required";
+      } else if (!alphanumericRegex.test(input.description)) {
+        errors.description =
+          "Description should only contain letters and numbers";
+      }
     } else if (!input.released) {
       errors.released = "Released is required";
-    } else if (!input.rating) {
-      errors.rating = "Rating is required";
-    } else if (!input.genres) {
-      errors.genres = "Genres is required";
-    } else if (!input.platforms) {
-      errors.platforms = "Platforms is required";
+      if (!input.rating) {
+        errors.rating = "Rating is required";
+      } else if (isNaN(input.rating)) {
+        errors.rating = "Rating must be a number";
+      } else if (input.rating < 0 || input.rating > 5) {
+        errors.rating = "Rating must be between 0 and 5";
+      } else if (!/^\d+(\.\d{1,2})?$/.test(input.rating)) {
+        errors.rating = "Rating can have up to 2 decimal places";
+      }
+      if (!input.genres.length) {
+        errors.genres = "Genres is required";
+      }
+      if (!input.platforms.length) {
+        errors.platforms = "Platforms is required";
+      }
     } else if (!input.background_image) {
-      errors.background_image = "Background_image is required";
+      errors.background_image = "Background image URL is required";
+    } else if (!urlRegex.test(input.background_image)) {
+      errors.background_image = "Background image URL is not valid";
     }
     return errors;
   };
@@ -202,6 +221,9 @@ const CreateGame = () => {
             type="number"
             name="rating"
             value={input.rating}
+            min={0}
+            max={5}
+            step={0.1}
             onChange={handleInputChange}
             className={style.input}
           />
@@ -210,7 +232,7 @@ const CreateGame = () => {
         <div>
           <label className={style.label}>Genres: </label>
           <select onChange={handleSelectGenres} className={style.select}>
-            <option value="">Select genre</option>
+            <option value="">Select Genres</option>
             {genres.map((genre) => (
               <option key={genre.id} value={genre.name}>
                 {genre.name}
@@ -237,7 +259,7 @@ const CreateGame = () => {
         <div>
           <label className={style.label}>Platforms: </label>
           <select onChange={handleSelectPlatforms} className={style.select}>
-            <option value="">Select platform</option>
+            <option value="">Select Platforms</option>
             {newSet.length > 0 ? (
               newSet.map((platform) => (
                 <option key={platform} value={platform}>
@@ -268,7 +290,7 @@ const CreateGame = () => {
           )}
         </div>
         <div>
-          <label className={style.label}>Background_image: </label>
+          <label className={style.label}>URL Image: </label>
           <input
             type="text"
             name="background_image"
