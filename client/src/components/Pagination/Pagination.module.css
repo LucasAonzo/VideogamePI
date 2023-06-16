@@ -9,30 +9,28 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 10px;
 }
 
 .buttons {
-  display: inline-block;
-  padding: 10px;
-  margin: 5px;
-  background-color: #eaeaea;
+  padding: 8px 12px;
+  background-color: #f7f7f7;
   color: #333;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .buttons:hover {
-  background-color: #ccc;
+  background-color: #ff7f00;
 }
 
 .current {
-  display: inline-block;
-  padding: 10px;
-  margin: 5px;
-  background-color: #333;
+  padding: 8px 12px;
+  background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
+  cursor: default;
 }

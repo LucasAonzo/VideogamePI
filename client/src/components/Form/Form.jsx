@@ -23,38 +23,48 @@ const CreateGame = () => {
     let errors = {};
     const alphanumericRegex = /^[a-zA-Z0-9]+$/;
     const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+
     if (!input.name) {
       errors.name = "Name is required";
     } else if (!alphanumericRegex.test(input.name)) {
       errors.name = "Name should only contain letters and numbers";
-      if (!input.description) {
-        errors.description = "Description is required";
-      } else if (!alphanumericRegex.test(input.description)) {
-        errors.description =
-          "Description should only contain letters and numbers";
-      }
-    } else if (!input.released) {
+    }
+
+    if (!input.description) {
+      errors.description = "Description is required";
+    } else if (!alphanumericRegex.test(input.description)) {
+      errors.description =
+        "Description should only contain letters and numbers";
+    }
+
+    if (!input.released) {
       errors.released = "Released is required";
-      if (!input.rating) {
-        errors.rating = "Rating is required";
-      } else if (isNaN(input.rating)) {
-        errors.rating = "Rating must be a number";
-      } else if (input.rating < 0 || input.rating > 5) {
-        errors.rating = "Rating must be between 0 and 5";
-      } else if (!/^\d+(\.\d{1,2})?$/.test(input.rating)) {
-        errors.rating = "Rating can have up to 2 decimal places";
-      }
-      if (!input.genres.length) {
-        errors.genres = "Genres is required";
-      }
-      if (!input.platforms.length) {
-        errors.platforms = "Platforms is required";
-      }
-    } else if (!input.background_image) {
+    }
+
+    if (!input.rating) {
+      errors.rating = "Rating is required";
+    } else if (isNaN(input.rating)) {
+      errors.rating = "Rating must be a number";
+    } else if (input.rating < 0 || input.rating > 5) {
+      errors.rating = "Rating must be between 0 and 5";
+    } else if (!/^\d+(\.\d{1,2})?$/.test(input.rating)) {
+      errors.rating = "Rating can have up to 2 decimal places";
+    }
+
+    if (!input.genres.length) {
+      errors.genres = "Genres is required";
+    }
+
+    if (!input.platforms.length) {
+      errors.platforms = "Platforms is required";
+    }
+
+    if (!input.background_image) {
       errors.background_image = "Background image URL is required";
     } else if (!urlRegex.test(input.background_image)) {
       errors.background_image = "Background image URL is not valid";
     }
+
     return errors;
   };
 
@@ -239,9 +249,9 @@ const CreateGame = () => {
               </option>
             ))}
           </select>
-          <div>
+          <div className={style.selectcontainer}>
             {input.genres.map((genre) => (
-              <div key={genre}>
+              <div className={style.selectoption} key={genre}>
                 <p>{genre}</p>
                 <button
                   type="button"
@@ -270,9 +280,9 @@ const CreateGame = () => {
               <option disabled>No platforms available</option>
             )}
           </select>
-          <div>
+          <div className={style.selectcontainer}>
             {input.platforms.map((platform) => (
-              <div key={platform}>
+              <div key={platform} className={style.selectoption}>
                 <p>{platform}</p>
                 <button
                   type="button"

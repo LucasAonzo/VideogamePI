@@ -6,11 +6,13 @@ const LoadingPage = () => {
     <div className={style.container}>
       <h1 className={style.titulo}>Loading...</h1>
 
-      <img
-        className={style.img}
-        src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif"
-        alt="Loading..."
-      />
+      <iframe
+        src="https://giphy.com/embed/L05HgB2h6qICDs5Sms"
+        width="180"
+        height="180"
+        className={style.gif}
+        allowFullScreen
+      ></iframe>
     </div>
   );
 };

@@ -1,11 +1,20 @@
 .container {
-  max-width: 600px; /* Aumentamos el ancho máximo del contenedor */
-  margin: auto; /* Centramos el contenedor horizontalmente */
-  padding: 40px; /* Aumentamos el espacio interno del contenedor */
+  max-width: 600px;
+  margin: auto;
+  padding: 40px;
   background-color: #f5f5f5;
   border: 1px solid #ccc;
   border-radius: 5px;
   margin-top: 50px;
+  padding-bottom: 100px;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    max-width: 100%;
+    padding: 20px;
+    margin: 15px;
+  }
 }
 
 .form-group {
@@ -23,25 +32,62 @@
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  margin-bottom: 10px; /* Agregamos espaciado entre inputs */
+  margin-bottom: 10px;
 }
 
 .input[type="text"],
 .input[type="date"],
-.input[type="number"] {
+.input[type="number"],
+.input[type="button"] {
   width: 100%;
   max-width: 300px;
 }
 
-.select-container {
-  width: 100%;
+.selectcontainer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.selectoption {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.selectoption button {
+  border: none;
+  background-color: transparent;
+  background-color: red;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.selectoption p {
+  margin-right: 10px;
 }
 
 .select {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  margin-bottom: 10px; /* Agregamos espaciado entre selects */
+  margin-bottom: 10px;
+  width: 100%;
+  max-width: 300px;
 }
 
 .genres-list,
@@ -86,4 +132,10 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .button {
+    padding: 8px 16px;
+  }
 }

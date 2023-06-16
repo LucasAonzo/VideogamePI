@@ -5,6 +5,12 @@ export default function Navbar() {
   return (
     <nav className={style.nav}>
       <h1 className={style.titlelogo}>VideogamePI</h1>
+      <input type="checkbox" id="navbar-toggle" className={style.toggle} />
+      <label htmlFor="navbar-toggle" className={style.ham}>
+        <span className={style.hambar}></span>
+        <span className={style.hambar}></span>
+        <span className={style.hambar}></span>
+      </label>
       <ul className={style.ul}>
         <li className={style.li}>
           <Link to="/videogames">

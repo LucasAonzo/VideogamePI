@@ -11,10 +11,8 @@ import style from "./Home.module.css";
 const Home = (props) => {
   const dispatch = useDispatch();
   const allGames = useSelector((state) => state.allGames);
-  console.log(allGames);
-
+  const genres = useSelector((state) => state.genres);
   const [currentPage, setCurrentPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(true);
   const gamesPerPage = 15;
 
   // Calcular los índices del primer y último juego en la página actual
@@ -32,36 +30,30 @@ const Home = (props) => {
   useEffect(() => {
     dispatch(getAllGames());
     dispatch(getGenres());
-    setIsLoading(false);
   }, [dispatch]);
 
-  if (isLoading) {
+  if (!allGames.length || !genres.length) {
     return <Loading />;
   }
 
-  console.log(allGames.genres);
-
   return (
-    <div>
+    <div className={style.container}>
       <SearchBar />
       <Filter />
       <div className={style.cardsContainer}>
-        {currentGames.map((game, index) => {
-          return (
-            <div className={style.cards} key={index}>
-              <Card
-                id={game.id}
-                name={game.name}
-                image={game.image}
-                genres={game.genres}
-                rating={game.rating}
-              />
-            </div>
-          );
-        })}
+        {currentGames.map((game, index) => (
+          <div className={style.cards} key={index}>
+            <Card
+              id={game.id}
+              name={game.name}
+              image={game.image}
+              genres={game.genres}
+              rating={game.rating}
+            />
+          </div>
+        ))}
       </div>
       <div className={style.containerButtons}>
-        {/* Renderizar el componente de paginación */}
         <Pagination
           gamesPerPage={gamesPerPage}
           allGames={allGames.length}
