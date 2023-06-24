@@ -17,21 +17,23 @@ export const getAllGames = () => {
       const data = response.data;
       return dispatch({ type: GET_ALL_GAMES, payload: data });
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
 };
 
-export const getGameByName = (name) => async (dispatch) => {
-  try {
-    const response = await axios.get(
-      `http://localhost:3001/videogames?name=${name}`
-    );
-    const data = response.data;
-    return dispatch({ type: GET_GAME_BY_NAME, payload: data });
-  } catch (error) {
-    console.log(error);
-  }
+export const getGameByName = (name) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/videogames?name=${name}`
+      );
+      const data = response.data;
+      return dispatch({ type: GET_GAME_BY_NAME, payload: data });
+    } catch (error) {
+      throw error;
+    }
+  };
 };
 
 export const getGameById = (idVideogame) => {
@@ -43,7 +45,7 @@ export const getGameById = (idVideogame) => {
       const data = response.data;
       return dispatch({ type: GET_GAME_BY_ID, payload: data });
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
 };
@@ -59,7 +61,7 @@ export const getGenres = () => {
       const data = response.data;
       return dispatch({ type: GET_GENRES, payload: data });
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
 };
@@ -73,7 +75,7 @@ export const postGame = (payload) => {
       );
       return dispatch({ type: GAME_POST, payload: response.data });
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
 };

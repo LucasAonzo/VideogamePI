@@ -1,6 +1,6 @@
 import { getGameByName } from "../../redux/actions";
 import { useDispatch } from "react-redux";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import style from "./Search.module.css";
 
 export default function SearchBar() {
@@ -11,13 +11,15 @@ export default function SearchBar() {
     setGame(event.target.value);
   };
 
-  useEffect(() => {
-    dispatch(getGameByName(game));
-  }, [game, dispatch]);
-
   const searchGame = () => {
-    dispatch(getGameByName(game));
-    setGame("");
+    if (!game) {
+      alert("Please enter a game name");
+      return;
+    }
+    dispatch(getGameByName(game)).catch((error) => {
+      window.alert("Game not found, please try again");
+      setGame("");
+    });
   };
 
   return (

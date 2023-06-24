@@ -21,7 +21,8 @@ const CreateGame = () => {
 
   const validateInputs = (input) => {
     let errors = {};
-    const alphanumericRegex = /^[a-zA-Z0-9]+$/;
+    const alphanumericRegex = /^[a-zA-Z0-9\s]+$/;
+
     const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
 
     if (!input.name) {
@@ -185,138 +186,157 @@ const CreateGame = () => {
     }
   };
 
-  return (
-    <div className={style.container}>
-      <form onSubmit={handleFormSubmit}>
-        <div>
-          <label className={style.label}>Name: </label>
-          <input
-            type="text"
-            name="name"
-            value={input.name}
-            onChange={handleInputChange}
-            className={style.input}
-          />
-          {errorIn.name && <p className={style.error}>{errorIn.name}</p>}
-        </div>
-        <div>
-          <label className={style.label}>Description: </label>
-          <input
-            type="text"
-            name="description"
-            value={input.description}
-            onChange={handleInputChange}
-            className={style.input}
-          />
-          {errorIn.description && (
-            <p className={style.error}>{errorIn.description}</p>
-          )}
-        </div>
-        <div>
-          <label className={style.label}>Released: </label>
-          <input
-            type="date"
-            name="released"
-            value={input.released}
-            onChange={handleInputChange}
-            className={style.input}
-          />
-          {errorIn.released && (
-            <p className={style.error}>{errorIn.released}</p>
-          )}
-        </div>
-        <div>
-          <label className={style.label}>Rating: </label>
-          <input
-            type="number"
-            name="rating"
-            value={input.rating}
-            min={0}
-            max={5}
-            step={0.1}
-            onChange={handleInputChange}
-            className={style.input}
-          />
-          {errorIn.rating && <p className={style.error}>{errorIn.rating}</p>}
-        </div>
-        <div>
-          <label className={style.label}>Genres: </label>
-          <select onChange={handleSelectGenres} className={style.select}>
-            <option value="">Select Genres</option>
-            {genres.map((genre) => (
-              <option key={genre.id} value={genre.name}>
-                {genre.name}
-              </option>
-            ))}
-          </select>
-          <div className={style.selectcontainer}>
-            {input.genres.map((genre) => (
-              <div className={style.selectoption} key={genre}>
-                <p>{genre}</p>
-                <button
-                  type="button"
-                  value={genre}
-                  onClick={handleSelectGenresDelete}
-                  className={style.button}
-                >
-                  X
-                </button>
-              </div>
-            ))}
-          </div>
-          {errorIn.genres && <p className={style.error}>{errorIn.genres}</p>}
-        </div>
-        <div>
-          <label className={style.label}>Platforms: </label>
-          <select onChange={handleSelectPlatforms} className={style.select}>
-            <option value="">Select Platforms</option>
-            {newSet.length > 0 ? (
-              newSet.map((platform) => (
-                <option key={platform} value={platform}>
-                  {platform}
-                </option>
-              ))
-            ) : (
-              <option disabled>No platforms available</option>
-            )}
-          </select>
-          <div className={style.selectcontainer}>
-            {input.platforms.map((platform) => (
-              <div key={platform} className={style.selectoption}>
-                <p>{platform}</p>
-                <button
-                  type="button"
-                  value={platform}
-                  onClick={handleSelectPlatformsDelete}
-                  className={style.button}
-                >
-                  X
-                </button>
-              </div>
-            ))}
-          </div>
-          {errorIn.platforms && (
-            <p className={style.error}>{errorIn.platforms}</p>
-          )}
-        </div>
-        <div>
-          <label className={style.label}>URL Image: </label>
-          <input
-            type="text"
-            name="background_image"
-            value={input.background_image}
-            onChange={handleInputChange}
-            className={style.input}
-          />
-          {errorIn.background_image && (
-            <p className={style.error}>{errorIn.background_image}</p>
-          )}
-        </div>
+  const isFormValid = () => {
+    return (
+      Object.keys(errorIn).length === 0 &&
+      input.name &&
+      input.description &&
+      input.released &&
+      input.rating &&
+      input.genres.length > 0 &&
+      input.platforms.length > 0 &&
+      input.background_image
+    );
+  };
 
-        <button type="submit" className={style.button}>
-          Create Game
-        </button>
-      </form>
+  return (
+    <div className={style.pageContainer}>
+      <div className={style.container}>
+        <form onSubmit={handleFormSubmit}>
+          <div>
+            <label className={style.label}>Name: </label>
+            <input
+              type="text"
+              name="name"
+              value={input.name}
+              onChange={handleInputChange}
+              className={style.input}
+            />
+            {errorIn.name && <p className={style.error}>{errorIn.name}</p>}
+          </div>
+          <div>
+            <label className={style.label}>Description: </label>
+            <input
+              type="text"
+              name="description"
+              value={input.description}
+              onChange={handleInputChange}
+              className={style.input}
+            />
+            {errorIn.description && (
+              <p className={style.error}>{errorIn.description}</p>
+            )}
+          </div>
+          <div>
+            <label className={style.label}>Released: </label>
+            <input
+              type="date"
+              name="released"
+              value={input.released}
+              onChange={handleInputChange}
+              className={style.input}
+            />
+            {errorIn.released && (
+              <p className={style.error}>{errorIn.released}</p>
+            )}
+          </div>
+          <div>
+            <label className={style.label}>Rating: </label>
+            <input
+              type="number"
+              name="rating"
+              value={input.rating}
+              min={0}
+              max={5}
+              step={0.1}
+              onChange={handleInputChange}
+              className={style.input}
+            />
+            {errorIn.rating && <p className={style.error}>{errorIn.rating}</p>}
+          </div>
+          <div>
+            <label className={style.label}>Genres: </label>
+            <select onChange={handleSelectGenres} className={style.select}>
+              <option value="">Select Genres</option>
+              {genres.map((genre) => (
+                <option key={genre.id} value={genre.name}>
+                  {genre.name}
+                </option>
+              ))}
+            </select>
+            <div className={style.selectcontainer}>
+              {input.genres.map((genre) => (
+                <div className={style.selectoption} key={genre}>
+                  <p>{genre}</p>
+                  <button
+                    type="button"
+                    value={genre}
+                    onClick={handleSelectGenresDelete}
+                    className={style.button}
+                  >
+                    X
+                  </button>
+                </div>
+              ))}
+            </div>
+            {errorIn.genres && <p className={style.error}>{errorIn.genres}</p>}
+          </div>
+          <div>
+            <label className={style.label}>Platforms: </label>
+            <select onChange={handleSelectPlatforms} className={style.select}>
+              <option value="">Select Platforms</option>
+              {newSet.length > 0 ? (
+                newSet.map((platform) => (
+                  <option key={platform} value={platform}>
+                    {platform}
+                  </option>
+                ))
+              ) : (
+                <option disabled>No platforms available</option>
+              )}
+            </select>
+            <div className={style.selectcontainer}>
+              {input.platforms.map((platform) => (
+                <div key={platform} className={style.selectoption}>
+                  <p>{platform}</p>
+                  <button
+                    type="button"
+                    value={platform}
+                    onClick={handleSelectPlatformsDelete}
+                    className={style.button}
+                  >
+                    X
+                  </button>
+                </div>
+              ))}
+            </div>
+            {errorIn.platforms && (
+              <p className={style.error}>{errorIn.platforms}</p>
+            )}
+          </div>
+          <div>
+            <label className={style.label}>URL Image: </label>
+            <input
+              type="text"
+              name="background_image"
+              value={input.background_image}
+              onChange={handleInputChange}
+              className={style.input}
+            />
+            {errorIn.background_image && (
+              <p className={style.error}>{errorIn.background_image}</p>
+            )}
+          </div>
+
+          <button
+            type="submit"
+            disabled={!isFormValid()}
+            className={style.button}
+          >
+            Create Game
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

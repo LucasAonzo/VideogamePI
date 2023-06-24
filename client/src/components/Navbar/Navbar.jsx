@@ -4,7 +4,9 @@ import { Link } from "react-router-dom";
 export default function Navbar() {
   return (
     <nav className={style.nav}>
-      <h1 className={style.titlelogo}>VideogamePI</h1>
+      <Link to="/videogames">
+        <h1 className={style.titlelogo}>VideogamePI</h1>
+      </Link>
       <input type="checkbox" id="navbar-toggle" className={style.toggle} />
       <label htmlFor="navbar-toggle" className={style.ham}>
         <span className={style.hambar}></span>
