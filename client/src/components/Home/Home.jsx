@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllGames, getGenres } from "../../redux/actions";
+import { getAllGames, getGenres, getGenresFiltered } from "../../redux/actions";
 import Card from "../Card/Card";
 import SearchBar from "../Search/Search";
 import Pagination from "../Pagination/Pagination";
@@ -21,6 +21,8 @@ const Home = (props) => {
 
   // Obtener los juegos que se mostrarán en la página actual
   const currentGames = allGames.slice(indexOfFirstGame, indexOfLastGame);
+  const selectedGenre = useSelector((state) => state.selectedGenre);
+  const gamesLoaded = useSelector((state) => state.gamesLoaded);
 
   // Función para cambiar de página
   const paginado = (pageNumber) => {
@@ -28,11 +30,23 @@ const Home = (props) => {
   };
 
   useEffect(() => {
-    dispatch(getAllGames());
-    dispatch(getGenres());
-  }, [dispatch]);
+    // Si los juegos ya han sido cargados, no hacemos nada
+    if (gamesLoaded) {
+      return;
+    }
 
-  if (!allGames.length || !genres.length) {
+    // Si hay un filtro de género seleccionado, cargamos los juegos filtrados
+    if (selectedGenre) {
+      dispatch(getGenresFiltered(selectedGenre));
+    }
+    // Si no, cargamos todos los juegos
+    else {
+      dispatch(getAllGames());
+    }
+    dispatch(getGenres());
+  }, [gamesLoaded, selectedGenre, dispatch]);
+
+  if (!gamesLoaded || !genres.length) {
     return <Loading />;
   }
 

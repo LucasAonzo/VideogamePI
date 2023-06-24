@@ -17,6 +17,7 @@ const initialState = {
   gameDetail: [],
   genres: [],
   ApiOrDb: "",
+  gamesLoaded: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -27,6 +28,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         allGames: action.payload,
         allGamesToFilter: action.payload,
+        gamesLoaded: true,
       };
     //Traer el juego que se busca
     case GET_GAME_BY_NAME:

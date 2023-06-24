@@ -13,7 +13,7 @@ const FilterButtons = () => {
 
   const genres = useSelector((state) => state.genres);
 
-  // action para filtrar por generos
+  // action para filtrar por géneros
   const filterByGenre = (event) => {
     const selectedGenreId = Number(event.target.value);
     dispatch(getGenresFiltered(selectedGenreId));
@@ -23,11 +23,11 @@ const FilterButtons = () => {
   const gameOrderRating = (event) => {
     dispatch(getGamesOrderRating(event.target.value));
   };
-  // action para ordenar alfabeticamente
+  // action para ordenar alfabéticamente
   const gamesOrderAlphabetic = (event) => {
     dispatch(getGamesOrderAlphabetic(event.target.value));
   };
-  // functiones de api o db
+  // funciones de api o db
   const filterByOrigin = (event) => {
     dispatch(getGamesFromApiOrDb(event.target.value));
   };
@@ -35,7 +35,11 @@ const FilterButtons = () => {
   return (
     <div className={style.container}>
       <div>
+        <label className={style.tituloinput} htmlFor="genre-select">
+          Genres:
+        </label>
         <select
+          id="genre-select"
           className={style.selects}
           defaultValue=""
           onChange={filterByGenre}
@@ -53,7 +57,11 @@ const FilterButtons = () => {
         </select>
       </div>
       <div>
+        <label className={style.tituloinput} htmlFor="origin-select">
+          Origin:
+        </label>
         <select
+          id="origin-select"
           className={style.selects}
           defaultValue=""
           onChange={filterByOrigin}
@@ -68,7 +76,11 @@ const FilterButtons = () => {
       </div>
 
       <div>
+        <label className={style.tituloinput} htmlFor="rating-select">
+          Rating:
+        </label>
         <select
+          id="rating-select"
           className={style.selects}
           defaultValue=""
           onChange={gameOrderRating}
@@ -81,7 +93,11 @@ const FilterButtons = () => {
         </select>
       </div>
       <div>
+        <label className={style.tituloinput} htmlFor="alphabetical-select">
+          A/Z:
+        </label>
         <select
+          id="alphabetical-select"
           className={style.selects}
           defaultValue=""
           onChange={gamesOrderAlphabetic}
