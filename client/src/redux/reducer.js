@@ -57,27 +57,37 @@ const reducer = (state = initialState, action) => {
       };
 
     // Filtrar segun el genero
+
     case GET_GENRES_FILTERED:
       const selectedGenreId = action.payload;
       const selectedGenre = state.genres.find(
         (genre) => genre.id === selectedGenreId
       );
+
+      const filteredGames = selectedGenreId
+        ? state.allGamesToFilter.filter((game) => {
+            if (Array.isArray(game.genres)) {
+              // Verificar si el género está incluido en el array de géneros
+              return game.genres.includes(selectedGenre.name);
+            } else if (typeof game.genres === "string") {
+              // Verificar si el género es igual al seleccionado
+              return game.genres === selectedGenre.name;
+            } else if (typeof game.genres === "object" && game.genres.name) {
+              // Verificar si el nombre del género es igual al seleccionado
+              return game.genres.name === selectedGenre.name;
+            } else if (Array.isArray(game.genres) && game.genres.length > 0) {
+              // Verificar si alguno de los géneros en el array coincide con el seleccionado
+              return game.genres.some(
+                (genre) => genre.name === selectedGenre.name
+              );
+            }
+            return false;
+          })
+        : state.allGamesToFilter;
+
       return {
         ...state,
-        allGames:
-          state.ApiOrDb === ""
-            ? state.allGamesToFilter.filter((game) =>
-                game.genres.includes(selectedGenre.name)
-              )
-            : state.ApiOrDb === "API"
-            ? state.allGamesToFilter.filter(
-                (game) =>
-                  !isNaN(game.id) && game.genres.includes(selectedGenre.name)
-              )
-            : state.allGamesToFilter.filter(
-                (game) =>
-                  isNaN(game.id) && game.genres.includes(selectedGenre.name)
-              ),
+        allGames: filteredGames,
       };
 
     // Ordenar por rating

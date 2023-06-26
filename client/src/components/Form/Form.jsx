@@ -21,7 +21,9 @@ const CreateGame = () => {
 
   const validateInputs = (input) => {
     let errors = {};
-    const alphanumericRegex = /^[a-zA-Z0-9\s]+$/;
+    const alphanumericRegex = /^[\p{L}0-9\s]+$/u;
+
+    const aphhanumericregex2 = /^[\p{L}0-9\s.,;]+$/u;
 
     const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
 
@@ -33,7 +35,7 @@ const CreateGame = () => {
 
     if (!input.description) {
       errors.description = "Description is required";
-    } else if (!alphanumericRegex.test(input.description)) {
+    } else if (!aphhanumericregex2.test(input.description)) {
       errors.description =
         "Description should only contain letters and numbers";
     }

@@ -2,6 +2,20 @@ const axios = require("axios");
 const { Videogame, Genre } = require("../db");
 const API_KEY = process.env.API_KEY;
 
+const mapListGames = (arr) =>
+  arr.map((result) => {
+    return {
+      id: result.id,
+      name: result.name,
+      description: result.description,
+      background_image: result.background_image,
+      released: result.released,
+      rating: result.rating,
+      createdInDb: result.createdInDb,
+      genres: result.genres.map((g) => g.name),
+    };
+  });
+
 const getGames = async () => {
   const apiGames = [];
   for (let i = 1; i <= 5; i++) {
@@ -32,7 +46,9 @@ const getGames = async () => {
     },
   });
 
-  const allGames = apiGames.concat(dbGames);
+  const mappedDbGameList = mapListGames(dbGames);
+
+  const allGames = apiGames.concat(mappedDbGameList);
 
   const gameList = allGames.map((game) => {
     return {

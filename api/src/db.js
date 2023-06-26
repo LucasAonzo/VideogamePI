@@ -44,18 +44,6 @@ const { Videogame, Genre } = sequelize.models;
 Videogame.belongsToMany(Genre, { through: "videogame_genre" });
 Genre.belongsToMany(Videogame, { through: "videogame_genre" });
 
-sequelize
-  .sync({ force: false })
-  .then(() => {
-    console.log("Modelos sincronizados correctamente con la base de datos");
-  })
-  .catch((error) => {
-    console.error(
-      "Error al sincronizar los modelos con la base de datos:",
-      error
-    );
-  });
-
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize, // para importart la conexión { conn } = require('./db.js');
