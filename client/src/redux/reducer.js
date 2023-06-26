@@ -65,7 +65,7 @@ const reducer = (state = initialState, action) => {
       );
 
       const filteredGames = selectedGenreId
-        ? state.allGamesToFilter.filter((game) => {
+        ? state.allGames.filter((game) => {
             if (Array.isArray(game.genres)) {
               // Verificar si el género está incluido en el array de géneros
               return game.genres.includes(selectedGenre.name);
