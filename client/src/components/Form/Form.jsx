@@ -172,6 +172,7 @@ const CreateGame = () => {
         return;
       } else {
         dispatch(postGame(input));
+        dispatch(getAllGames());
 
         setInput({
           name: "",

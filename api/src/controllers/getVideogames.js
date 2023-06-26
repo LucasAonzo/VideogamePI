@@ -13,6 +13,7 @@ const mapListGames = (arr) =>
       rating: result.rating,
       createdInDb: result.createdInDb,
       genres: result.genres.map((g) => g.name),
+      platforms: result.platforms,
     };
   });
 
