@@ -13,9 +13,9 @@ import {
 
 const initialState = {
   allGames: [],
-  allUnfilteredGames: [], // add this
-  allDbGames: [], // add this
-  allApiGames: [], // add this
+  allUnfilteredGames: [],
+  allDbGames: [],
+  allApiGames: [],
   lastGenreFilter: null,
   allGamesToFilter: [],
   allGamesGenres: [],
@@ -102,7 +102,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         allGames: filteredGames,
-        lastGenreFilter: selectedGenre, // add this
+        lastGenreFilter: selectedGenre,
       };
 
     // Ordenar por rating
@@ -151,14 +151,6 @@ const reducer = (state = initialState, action) => {
           filteredGames = dbGames.filter((game) => {
             if (Array.isArray(game.genres)) {
               return game.genres.includes(state.lastGenreFilter.name);
-            } else if (typeof game.genres === "string") {
-              return game.genres === state.lastGenreFilter.name;
-            } else if (typeof game.genres === "object" && game.genres.name) {
-              return game.genres.name === state.lastGenreFilter.name;
-            } else if (Array.isArray(game.genres) && game.genres.length > 0) {
-              return game.genres.some(
-                (genre) => genre.name === state.lastGenreFilter.name
-              );
             }
             return false;
           });
@@ -178,14 +170,6 @@ const reducer = (state = initialState, action) => {
           filteredGames = apiGames.filter((game) => {
             if (Array.isArray(game.genres)) {
               return game.genres.includes(state.lastGenreFilter.name);
-            } else if (typeof game.genres === "string") {
-              return game.genres === state.lastGenreFilter.name;
-            } else if (typeof game.genres === "object" && game.genres.name) {
-              return game.genres.name === state.lastGenreFilter.name;
-            } else if (Array.isArray(game.genres) && game.genres.length > 0) {
-              return game.genres.some(
-                (genre) => genre.name === state.lastGenreFilter.name
-              );
             }
             return false;
           });
@@ -202,14 +186,6 @@ const reducer = (state = initialState, action) => {
           filteredGames = state.allUnfilteredGames.filter((game) => {
             if (Array.isArray(game.genres)) {
               return game.genres.includes(state.lastGenreFilter.name);
-            } else if (typeof game.genres === "string") {
-              return game.genres === state.lastGenreFilter.name;
-            } else if (typeof game.genres === "object" && game.genres.name) {
-              return game.genres.name === state.lastGenreFilter.name;
-            } else if (Array.isArray(game.genres) && game.genres.length > 0) {
-              return game.genres.some(
-                (genre) => genre.name === state.lastGenreFilter.name
-              );
             }
             return false;
           });
