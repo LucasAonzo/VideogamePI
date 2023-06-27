@@ -54,17 +54,21 @@ const Home = () => {
       <SearchBar />
       <Filter />
       <div className={style.cardsContainer}>
-        {currentGames.map((game, index) => (
-          <div className={style.cards} key={index}>
-            <Card
-              id={game.id}
-              name={game.name}
-              image={game.image}
-              genres={game.genres}
-              rating={game.rating}
-            />
-          </div>
-        ))}
+        {currentGames.length ? ( // Verificamos si currentGames tiene juegos
+          currentGames.map((game, index) => (
+            <div className={style.cards} key={index}>
+              <Card
+                id={game.id}
+                name={game.name}
+                image={game.image}
+                genres={game.genres}
+                rating={game.rating}
+              />
+            </div>
+          ))
+        ) : (
+          <div className={style.notFound}>Games not found for this filter</div>
+        )}
       </div>
       <div className={style.containerButtons}>
         <Pagination
