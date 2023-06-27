@@ -13,7 +13,12 @@ import {
 
 const initialState = {
   allGames: [],
+  allUnfilteredGames: [], // add this
+  allDbGames: [], // add this
+  allApiGames: [], // add this
+  lastGenreFilter: null,
   allGamesToFilter: [],
+  allGamesGenres: [],
   gameDetail: [],
   genres: [],
   ApiOrDb: "",
@@ -27,9 +32,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         allGames: action.payload,
+        allUnfilteredGames: action.payload,
         allGamesToFilter: action.payload,
+        allGamesGenres: action.payload,
         gamesLoaded: true,
       };
+
     //Traer el juego que se busca
     case GET_GAME_BY_NAME:
       return {
@@ -64,30 +72,37 @@ const reducer = (state = initialState, action) => {
         (genre) => genre.id === selectedGenreId
       );
 
+      let gamesToFilter = [];
+
+      if (state.ApiOrDb === "DB") {
+        gamesToFilter = [...state.allDbGames];
+      } else if (state.ApiOrDb === "API") {
+        gamesToFilter = [...state.allApiGames];
+      } else {
+        gamesToFilter = [...state.allUnfilteredGames];
+      }
+
       const filteredGames = selectedGenreId
-        ? state.allGames.filter((game) => {
+        ? gamesToFilter.filter((game) => {
             if (Array.isArray(game.genres)) {
-              // Verificar si el género está incluido en el array de géneros
               return game.genres.includes(selectedGenre.name);
             } else if (typeof game.genres === "string") {
-              // Verificar si el género es igual al seleccionado
               return game.genres === selectedGenre.name;
             } else if (typeof game.genres === "object" && game.genres.name) {
-              // Verificar si el nombre del género es igual al seleccionado
               return game.genres.name === selectedGenre.name;
             } else if (Array.isArray(game.genres) && game.genres.length > 0) {
-              // Verificar si alguno de los géneros en el array coincide con el seleccionado
               return game.genres.some(
                 (genre) => genre.name === selectedGenre.name
               );
             }
             return false;
           })
-        : state.allGamesToFilter;
+        : gamesToFilter;
 
       return {
         ...state,
         allGames: filteredGames,
+        lastGenreFilter: selectedGenre, // add this
       };
 
     // Ordenar por rating
@@ -127,27 +142,82 @@ const reducer = (state = initialState, action) => {
       }
     // Filtrar juegos por si es de la API o la DB
     case GET_GAMES_FROM_API_OR_DB:
-      if (action.payload === "API") {
-        return {
-          ...state,
-          ApiOrDb: "API",
-          allGames: [
-            ...state.allGamesToFilter.filter((game) => !isNaN(game.id)),
-          ],
-        };
-      } else if (action.payload === "DB") {
+      if (action.payload === "DB") {
+        const dbGames = state.allUnfilteredGames.filter((game) =>
+          isNaN(game.id)
+        );
+        let filteredGames = dbGames;
+        if (state.lastGenreFilter) {
+          filteredGames = dbGames.filter((game) => {
+            if (Array.isArray(game.genres)) {
+              return game.genres.includes(state.lastGenreFilter.name);
+            } else if (typeof game.genres === "string") {
+              return game.genres === state.lastGenreFilter.name;
+            } else if (typeof game.genres === "object" && game.genres.name) {
+              return game.genres.name === state.lastGenreFilter.name;
+            } else if (Array.isArray(game.genres) && game.genres.length > 0) {
+              return game.genres.some(
+                (genre) => genre.name === state.lastGenreFilter.name
+              );
+            }
+            return false;
+          });
+        }
         return {
           ...state,
           ApiOrDb: "DB",
-          allGames: [
-            ...state.allGamesToFilter.filter((game) => isNaN(game.id)),
-          ],
+          allGames: filteredGames,
+          allDbGames: dbGames,
+        };
+      } else if (action.payload === "API") {
+        const apiGames = state.allUnfilteredGames.filter(
+          (game) => !isNaN(game.id)
+        );
+        let filteredGames = apiGames;
+        if (state.lastGenreFilter) {
+          filteredGames = apiGames.filter((game) => {
+            if (Array.isArray(game.genres)) {
+              return game.genres.includes(state.lastGenreFilter.name);
+            } else if (typeof game.genres === "string") {
+              return game.genres === state.lastGenreFilter.name;
+            } else if (typeof game.genres === "object" && game.genres.name) {
+              return game.genres.name === state.lastGenreFilter.name;
+            } else if (Array.isArray(game.genres) && game.genres.length > 0) {
+              return game.genres.some(
+                (genre) => genre.name === state.lastGenreFilter.name
+              );
+            }
+            return false;
+          });
+        }
+        return {
+          ...state,
+          ApiOrDb: "API",
+          allGames: filteredGames,
+          allApiGames: apiGames,
         };
       } else {
+        let filteredGames = [...state.allUnfilteredGames];
+        if (state.lastGenreFilter) {
+          filteredGames = state.allUnfilteredGames.filter((game) => {
+            if (Array.isArray(game.genres)) {
+              return game.genres.includes(state.lastGenreFilter.name);
+            } else if (typeof game.genres === "string") {
+              return game.genres === state.lastGenreFilter.name;
+            } else if (typeof game.genres === "object" && game.genres.name) {
+              return game.genres.name === state.lastGenreFilter.name;
+            } else if (Array.isArray(game.genres) && game.genres.length > 0) {
+              return game.genres.some(
+                (genre) => genre.name === state.lastGenreFilter.name
+              );
+            }
+            return false;
+          });
+        }
         return {
           ...state,
           ApiOrDb: "",
-          allGames: [...state.allGamesToFilter],
+          allGames: filteredGames,
         };
       }
 

@@ -44,9 +44,7 @@ const FilterButtons = () => {
           defaultValue=""
           onChange={filterByGenre}
         >
-          <option disabled value="">
-            Genres
-          </option>
+          <option value="0">All genre</option>
           {genres.map((genre) => {
             return (
               <option key={genre.id} value={genre.id}>
