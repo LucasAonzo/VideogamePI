@@ -100,6 +100,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
       };
+
     // Ordenar por rating
     case GET_GAMES_ORDER_RATING:
       if (action.payload === "Ascendente") {
@@ -113,6 +114,7 @@ const reducer = (state = initialState, action) => {
           allGames: [...state.allGames.sort((a, b) => b.rating - a.rating)],
         };
       }
+
     // Ordenar alfabeticamente
     case GET_GAMES_ORDER_ALPHABETIC:
       if (action.payload === "Ascendente") {
@@ -130,14 +132,16 @@ const reducer = (state = initialState, action) => {
           ],
         };
       }
+
     // Filtrar juegos por si es de la API o la DB
     case GET_GAMES_FROM_API_OR_DB:
       if (action.payload === "DB") {
-        const dbGames = state.allUnfilteredGames.filter((game) =>
-          isNaN(game.id)
+        const dbGames = state.allUnfilteredGames.filter(
+          (game) => isNaN(game.id) // usamos isNaN para saber si no es un numero (id UUID)
         );
-        let filteredGames = dbGames;
+        let filteredGames = dbGames; // si no hay filtro de genero, se muestran todos los juegos
         if (state.lastGenreFilter) {
+          // si hay filtro de genero, se muestran los juegos que incluyan ese genero
           filteredGames = dbGames.filter((game) =>
             game.genres.includes(state.lastGenreFilter.name)
           );
@@ -150,7 +154,7 @@ const reducer = (state = initialState, action) => {
         };
       } else if (action.payload === "API") {
         const apiGames = state.allUnfilteredGames.filter(
-          (game) => !isNaN(game.id)
+          (game) => !isNaN(game.id) // usamos isNaN para saber si es un numero
         );
         let filteredGames = apiGames;
         if (state.lastGenreFilter) {

@@ -197,7 +197,7 @@ const CreateGame = () => {
           <div>
             <label className={style.label}>Rating: </label>
             <input
-              type="number"
+              type=""
               name="rating"
               value={input.rating}
               min={0}
