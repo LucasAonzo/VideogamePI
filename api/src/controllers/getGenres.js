@@ -10,13 +10,14 @@ const getGenres = async () => {
   const genres = dataGenres.results.map((gen) => gen.name);
   genres.map((gen) =>
     Genre.findOrCreate({
+      // findOrCreate: Busca un elemento concreto o lo crea si no existe
       where: {
         name: gen,
       },
     })
   );
 
-  const allGenres = await Genre.findAll();
+  const allGenres = await Genre.findAll(); // findAll: Busca todos los elementos de la tabla
 
   return allGenres;
 };

@@ -15,7 +15,7 @@ const mapListGames = (arr) =>
       genres: result.genres.map((g) => g.name),
       platforms: result.platforms,
     };
-  });
+  }); //funcion auxiliar para mapear los generos de la base de datos
 
 const getGames = async () => {
   const apiGames = [];
@@ -47,9 +47,9 @@ const getGames = async () => {
     },
   });
 
-  const mappedDbGameList = mapListGames(dbGames);
+  const mappedDbGameList = mapListGames(dbGames); //uso la funcion auxiliar
 
-  const allGames = apiGames.concat(mappedDbGameList);
+  const allGames = apiGames.concat(mappedDbGameList); //concateno los juegos de la api con los de la base de datos
 
   const gameList = allGames.map((game) => {
     return {
@@ -62,8 +62,8 @@ const getGames = async () => {
       rating: game.rating,
       createdInDb: game.createdInDb,
     };
-  });
-  return gameList;
+  }); //mapeo los juegos para que tengan el mismo formato
+  return gameList; //devuelvo la lista de juegos
 };
 
 const gameDetail = async (id) => {
@@ -77,7 +77,7 @@ const gameDetail = async (id) => {
       image: detail.background_image,
       name: detail.name,
       genres: detail.genres,
-      description: detail.description.replace(/<[^>]*>?/g, ""),
+      description: detail.description.replace(/<[^>]*>?/g, ""), //remuevo los tags html que tiene la api
       released: detail.released,
       rating: detail.rating,
       platforms: detail.platforms
@@ -89,9 +89,10 @@ const gameDetail = async (id) => {
   }
 
   if (
-    /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(id)
+    /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(id) //uso una expresion regular para saber si es un id UUID
   ) {
     const detailDb = await Videogame.findByPk(id, {
+      //findByPk: Busca un elemento por su clave primaria
       include: [
         {
           model: Genre,
@@ -112,7 +113,7 @@ const gameDetail = async (id) => {
       rating: detailDb.dataValues.rating,
       platforms: detailDb.dataValues.platforms,
       createdInDb: detailDb.dataValues.createdInDb,
-    };
+    }; //mapeo los datos para que tengan el mismo formato
 
     return gameDbInfo;
   }
@@ -131,6 +132,7 @@ const createGame = async (
     throw "missing data to create a videogame";
   } else {
     const newGame = await Videogame.create({
+      //create: Crea un elemento en la tabla
       name,
       description,
       released,
@@ -141,12 +143,13 @@ const createGame = async (
     });
 
     const newGenres = await Genre.findAll({
+      //findAll: Busca todos los elementos de la tabla
       where: {
         name: genres,
       },
     });
 
-    newGame.addGenres(newGenres);
+    newGame.addGenres(newGenres); //addGenres: Agrega un genero a un juego
     return newGame;
   }
 };

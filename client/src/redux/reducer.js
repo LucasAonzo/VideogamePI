@@ -69,6 +69,7 @@ const reducer = (state = initialState, action) => {
     case GET_GENRES_FILTERED:
       const selectedGenreId = action.payload;
       const selectedGenre = state.genres.find(
+        // Busca el genero seleccionado
         (genre) => genre.id === selectedGenreId
       );
 
@@ -83,20 +84,9 @@ const reducer = (state = initialState, action) => {
       }
 
       const filteredGames = selectedGenreId
-        ? gamesToFilter.filter((game) => {
-            if (Array.isArray(game.genres)) {
-              return game.genres.includes(selectedGenre.name);
-            } else if (typeof game.genres === "string") {
-              return game.genres === selectedGenre.name;
-            } else if (typeof game.genres === "object" && game.genres.name) {
-              return game.genres.name === selectedGenre.name;
-            } else if (Array.isArray(game.genres) && game.genres.length > 0) {
-              return game.genres.some(
-                (genre) => genre.name === selectedGenre.name
-              );
-            }
-            return false;
-          })
+        ? gamesToFilter.filter((game) =>
+            game.genres.includes(selectedGenre.name)
+          )
         : gamesToFilter;
 
       return {
@@ -105,12 +95,12 @@ const reducer = (state = initialState, action) => {
         lastGenreFilter: selectedGenre,
       };
 
-    // Ordenar por rating
-
+    // Crear un juego
     case GAME_POST:
       return {
         ...state,
       };
+    // Ordenar por rating
     case GET_GAMES_ORDER_RATING:
       if (action.payload === "Ascendente") {
         return {
@@ -148,12 +138,9 @@ const reducer = (state = initialState, action) => {
         );
         let filteredGames = dbGames;
         if (state.lastGenreFilter) {
-          filteredGames = dbGames.filter((game) => {
-            if (Array.isArray(game.genres)) {
-              return game.genres.includes(state.lastGenreFilter.name);
-            }
-            return false;
-          });
+          filteredGames = dbGames.filter((game) =>
+            game.genres.includes(state.lastGenreFilter.name)
+          );
         }
         return {
           ...state,
@@ -167,12 +154,9 @@ const reducer = (state = initialState, action) => {
         );
         let filteredGames = apiGames;
         if (state.lastGenreFilter) {
-          filteredGames = apiGames.filter((game) => {
-            if (Array.isArray(game.genres)) {
-              return game.genres.includes(state.lastGenreFilter.name);
-            }
-            return false;
-          });
+          filteredGames = apiGames.filter((game) =>
+            game.genres.includes(state.lastGenreFilter.name)
+          );
         }
         return {
           ...state,
@@ -183,12 +167,9 @@ const reducer = (state = initialState, action) => {
       } else {
         let filteredGames = [...state.allUnfilteredGames];
         if (state.lastGenreFilter) {
-          filteredGames = state.allUnfilteredGames.filter((game) => {
-            if (Array.isArray(game.genres)) {
-              return game.genres.includes(state.lastGenreFilter.name);
-            }
-            return false;
-          });
+          filteredGames = state.allUnfilteredGames.filter((game) =>
+            game.genres.includes(state.lastGenreFilter.name)
+          );
         }
         return {
           ...state,

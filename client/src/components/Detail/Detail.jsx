@@ -6,8 +6,8 @@ import { getGameById, clearGameById } from "../../redux/actions";
 import Loading from "../Loading/Loading";
 
 export default function Detail() {
-  const { idVideogame } = useParams();
   const dispatch = useDispatch();
+  const { idVideogame } = useParams();
   const gameDetail = useSelector((state) => state.gameDetail);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -23,41 +23,31 @@ export default function Detail() {
       });
 
     return () => {
-      dispatch(clearGameById());
+      dispatch(clearGameById()); // Limpia el detalle del juego cuando se desmonta el componente para cuando vuelva a abrir detail
     };
   }, [dispatch, idVideogame]);
 
   const renderGenres = () => {
-    if (gameDetail.genres?.length === 2) {
-      return gameDetail.genres.map((genre, index) => (
-        <span key={index} className={style.dupliGenre}>
-          {genre.name}
-        </span>
-      ));
-    } else if (gameDetail.genres?.length === 1) {
-      return (
-        <span className={style.uniqueGenre}>{gameDetail.genres[0].name}</span>
-      );
-    } else {
-      return gameDetail.genres?.map((genre, index) => (
-        <span key={index} className={style.genre}>
-          {genre.name}
-        </span>
-      ));
-    }
+    return gameDetail.genres?.map((genre, index) => (
+      <span key={index} className={style.genre}>
+        {genre.name}
+      </span>
+    ));
   };
 
   console.log(gameDetail);
+
   const renderPlatforms = (platforms) => {
-    if (platforms) {
-      const platformArray = platforms.toString().split(","); // Convertir a cadena y luego dividir
-      return platformArray.map((platform, index) => (
-        <span className={style.platform} key={index}>
-          {platform}
-        </span>
-      ));
-    }
-    return null;
+    return (
+      platforms
+        ?.toString() // convierto en array
+        .split(",") // separo por comas
+        .map((platform, index) => (
+          <span className={style.platform} key={index}>
+            {platform}
+          </span>
+        )) || null
+    );
   };
 
   return (

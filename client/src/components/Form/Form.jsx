@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { postGame, getAllGames, getGenres } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import style from "./Form.module.css";
+import { validateInputs } from "./Validation";
 
 const CreateGame = () => {
   const dispatch = useDispatch();
@@ -17,82 +18,32 @@ const CreateGame = () => {
     genres: [],
     platforms: [],
     background_image: "",
-  });
+  }); //estado local para guardar los valores del form
 
-  const validateInputs = (input) => {
-    let errors = {};
-    const alphanumericRegex = /^[\p{L}0-9\s]+$/u;
+  const [errorIn, setErrorIn] = useState({}); //estado local para guardar los errores
 
-    const aphhanumericregex2 = /^[\p{L}0-9\s.,;]+$/u;
-
-    const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
-
-    if (!input.name) {
-      errors.name = "Name is required";
-    } else if (!alphanumericRegex.test(input.name)) {
-      errors.name = "Name should only contain letters and numbers";
-    }
-
-    if (!input.description) {
-      errors.description = "Description is required";
-    } else if (!aphhanumericregex2.test(input.description)) {
-      errors.description =
-        "Description should only contain letters and numbers";
-    }
-
-    if (!input.released) {
-      errors.released = "Released is required";
-    }
-
-    if (!input.rating) {
-      errors.rating = "Rating is required";
-    } else if (isNaN(input.rating)) {
-      errors.rating = "Rating must be a number";
-    } else if (input.rating < 0 || input.rating > 5) {
-      errors.rating = "Rating must be between 0 and 5";
-    } else if (!/^\d+(\.\d{1,2})?$/.test(input.rating)) {
-      errors.rating = "Rating can have up to 2 decimal places";
-    }
-
-    if (!input.genres.length) {
-      errors.genres = "Genres is required";
-    }
-
-    if (!input.platforms.length) {
-      errors.platforms = "Platforms is required";
-    }
-
-    if (!input.background_image) {
-      errors.background_image = "Background image URL is required";
-    } else if (!urlRegex.test(input.background_image)) {
-      errors.background_image = "Background image URL is not valid";
-    }
-
-    return errors;
-  };
-
-  const [errorIn, setErrorIn] = useState({});
-
-  const arrPlat = [];
-  allGames.map((games) =>
-    games.platforms?.map((platfs) => arrPlat.push(platfs))
+  const arrPlat = []; //array para guardar las plataformas
+  allGames.map(
+    (games) => games.platforms?.map((platfs) => arrPlat.push(platfs)) //recorro los juegos y guardo las plataformas en el array
   );
-  let newSet = arrPlat.length > 0 ? [...new Set(arrPlat)] : [];
+  let newSet = arrPlat.length > 0 ? [...new Set(arrPlat)] : []; //quito las plataformas repetidas
 
   useEffect(() => {
     dispatch(getGenres());
-    dispatch(getAllGames());
+    return () => {
+      dispatch(getAllGames());
+    };
   }, [dispatch]);
 
   const handleInputChange = (e) => {
     setInput({
       ...input,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value, //guardo los valores del form en el estado local
     });
     setErrorIn(
       validateInputs({
         ...input,
-        [e.target.name]: e.target.value,
+        [e.target.name]: e.target.value, //guardo los errores en el estado local
       })
     );
   };
@@ -100,7 +51,7 @@ const CreateGame = () => {
   const handleSelectGenres = (e) => {
     setInput({
       ...input,
-      genres: [...input.genres, e.target.value],
+      genres: [...input.genres, e.target.value], //guardo los valores de los select de generos en el estado local
     });
     setErrorIn(
       validateInputs({
@@ -113,7 +64,7 @@ const CreateGame = () => {
   const handleSelectGenresDelete = (e) => {
     setInput({
       ...input,
-      genres: input.genres.filter((genre) => genre !== e.target.value),
+      genres: input.genres.filter((genre) => genre !== e.target.value), //quito el valor del select del estado local
     });
     setErrorIn(
       validateInputs({
@@ -127,7 +78,7 @@ const CreateGame = () => {
     if (!input.platforms.includes(e.target.value)) {
       setInput({
         ...input,
-        platforms: [...input.platforms, e.target.value],
+        platforms: [...input.platforms, e.target.value], //guardo los valores del select de plataformas en el estado local
       });
       setErrorIn(
         validateInputs({
@@ -142,7 +93,7 @@ const CreateGame = () => {
     setInput({
       ...input,
       platforms: input.platforms.filter(
-        (platform) => platform !== e.target.value
+        (platform) => platform !== e.target.value //quito el valor del select del estado local
       ),
     });
     setErrorIn(
@@ -158,20 +109,20 @@ const CreateGame = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    const nameRepeated = allGames.find((game) => game.name === input.name);
+    const nameRepeated = allGames.find((game) => game.name === input.name); //veo si el nombre del juego ya existe
     if (nameRepeated) {
       alert("Game already exists");
     } else {
-      let resultError = Object.keys(validateInputs(input));
+      let resultError = Object.keys(validateInputs(input)); //guardo los errores en un array
       if (
         resultError.length !== 0 ||
         !input.genres.length ||
-        !input.platforms.length
+        !input.platforms.length //veo si hay errores o si no se selecciono ningun genero o plataforma
       ) {
-        alert("complete all fields");
+        alert("Complete all fields");
         return;
       } else {
-        dispatch(postGame(input));
+        dispatch(postGame(input)); //envio el juego al action
         dispatch(getAllGames());
 
         setInput({
@@ -182,7 +133,7 @@ const CreateGame = () => {
           genres: [],
           platforms: [],
           background_image: "",
-        });
+        }); //limpio el estado local
 
         alert("Game created successfully");
       }
@@ -200,7 +151,7 @@ const CreateGame = () => {
       input.platforms.length > 0 &&
       input.background_image
     );
-  };
+  }; //veo si hay errores y si los campos estan completos para habilitar el boton de submit
 
   return (
     <div className={style.pageContainer}>

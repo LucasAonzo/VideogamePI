@@ -4,12 +4,12 @@ import { useState } from "react";
 import style from "./Search.module.css";
 
 export default function SearchBar() {
-  const [game, setGame] = useState("");
+  const [game, setGame] = useState(""); // Estado local para guardar el valor del input
   const dispatch = useDispatch();
 
   const onChangeHandler = (event) => {
     setGame(event.target.value);
-  };
+  }; //aqui guardo el input en el estado local
 
   const searchGame = () => {
     if (!game) {
@@ -20,12 +20,11 @@ export default function SearchBar() {
       window.alert("Game not found, please try again");
       setGame("");
     });
-  };
+  }; //veo si esta vacio y si no, lo envio al action
 
   return (
     <div className={style.container}>
       <input
-        autoComplete="off"
         className={style.input}
         onChange={onChangeHandler}
         type="search"

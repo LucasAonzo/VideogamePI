@@ -1,39 +1,49 @@
-const validation = (input) => {
-  const regexName = /^[a-zA-Z0-9\s]+$/;
-  const regexURL = /\.(jpeg|jpg|gif|png)$/;
+const alphanumericRegex = /^[\p{L}0-9\s]+$/u;
+const aphhanumericregex2 = /^[\p{L}0-9\s.,;]+$/u;
+const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
 
-  // valido que la descripcion no este vacia
-  if (input.description === "") return "Description is required";
-  else if (!input.description === "") return "";
-  // valido que haya una url
-  if (input.background_image === "") return "URL is required";
-  else if (!input.background_image === "") return "";
-  // valido que la fecha de lanzamiento no este vacia
-  if (input.released === "") return "Released is required";
-  else if (!input.released === "") return "";
-  // valido que el rating este entre 0 y 5
-  if (input.rating < 0 && input.rating > 5)
-    return "The rating must be between 0 and 5";
-  else if (!input.rating < 0 && input.rating > 5) return "";
+export const validateInputs = (input) => {
+  let errors = {};
 
-  // valido las plataformas o generos
-  if (input.platform || input.genre) {
-    if (input.platform) {
-      // que haya por lo menos una plataforma
-      if (input.platform.length === 0) return "At least one platform";
-      else if (input.platform.length !== 0) return "";
-    } else {
-      // que haya por lo menos un genero
-      if (input.genre.length === 0) return "At least one genre";
-      else if (input.genre.length !== 0) return "";
-    }
+  if (!input.name) {
+    errors.name = "Name is required";
+  } else if (!alphanumericRegex.test(input.name)) {
+    errors.name = "Name should only contain letters and numbers";
   }
-  // valido que el nombre no este vacio
-  if (input.name === "") return "Name is required";
-  else if (!input.name === "") return "";
-  // valido que el nombre solo pueda tener letras y numeros
-  if (regexName.test(input.name)) return "";
-  else if (!regexName.test(input.name)) return "Only letters and numbers";
-};
 
-export default validation;
+  if (!input.description) {
+    errors.description = "Description is required";
+  } else if (!aphhanumericregex2.test(input.description)) {
+    errors.description = "Description should only contain letters and numbers";
+  }
+
+  if (!input.released) {
+    errors.released = "Released is required";
+  }
+
+  if (!input.rating) {
+    errors.rating = "Rating is required";
+  } else if (isNaN(input.rating)) {
+    errors.rating = "Rating must be a number";
+  } else if (input.rating < 0 || input.rating > 5) {
+    errors.rating = "Rating must be between 0 and 5";
+  } else if (!/^\d+(\.\d{1,2})?$/.test(input.rating)) {
+    errors.rating = "Rating can have up to 2 decimal places";
+  }
+
+  if (!input.genres.length) {
+    errors.genres = "Genres is required";
+  }
+
+  if (!input.platforms.length) {
+    errors.platforms = "Platforms is required";
+  }
+
+  if (!input.background_image) {
+    errors.background_image = "Background image URL is required";
+  } else if (!urlRegex.test(input.background_image)) {
+    errors.background_image = "Background image URL is not valid";
+  }
+
+  return errors;
+};

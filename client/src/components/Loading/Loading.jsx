@@ -7,6 +7,7 @@ const LoadingPage = () => {
       <h1 className={style.titulo}>Loading...</h1>
 
       <iframe
+        title="Loading Gif"
         src="https://giphy.com/embed/L05HgB2h6qICDs5Sms"
         width="180"
         height="180"

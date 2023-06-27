@@ -8,7 +8,7 @@ import Filter from "../Filter/Filter";
 import Loading from "../Loading/Loading";
 import style from "./Home.module.css";
 
-const Home = (props) => {
+const Home = () => {
   const dispatch = useDispatch();
   const allGames = useSelector((state) => state.allGames);
   const genres = useSelector((state) => state.genres);
@@ -16,11 +16,11 @@ const Home = (props) => {
   const gamesPerPage = 15;
 
   // Calcular los índices del primer y último juego en la página actual
-  const indexOfLastGame = currentPage * gamesPerPage;
+  const indexOfLastGame = currentPage * gamesPerPage; // 15 * 1 = 15
   const indexOfFirstGame = indexOfLastGame - gamesPerPage;
 
   // Obtener los juegos que se mostrarán en la página actual
-  const currentGames = allGames.slice(indexOfFirstGame, indexOfLastGame);
+  const currentGames = allGames.slice(indexOfFirstGame, indexOfLastGame); //con el slice saco una parte del array y lo guardo en un nuevo array
   const selectedGenre = useSelector((state) => state.selectedGenre);
   const gamesLoaded = useSelector((state) => state.gamesLoaded);
 
@@ -34,7 +34,6 @@ const Home = (props) => {
     if (gamesLoaded) {
       return;
     }
-
     // Si hay un filtro de género seleccionado, cargamos los juegos filtrados
     if (selectedGenre) {
       dispatch(getGenresFiltered(selectedGenre));
@@ -48,7 +47,7 @@ const Home = (props) => {
 
   if (!gamesLoaded || !genres.length) {
     return <Loading />;
-  }
+  } //vemos si los juegos estan cargados y si no, mostramos el componente de loading hasta que se carguen
 
   return (
     <div className={style.container}>
